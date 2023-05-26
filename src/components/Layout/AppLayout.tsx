@@ -1,13 +1,15 @@
-import { PropsWithChildren } from 'react';
+import { PropsWithChildren, useState } from 'react';
 import styled from '@emotion/styled';
 import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
+import { CSS_TYPE } from "@styles/styles";
 import homeIcon from '@icons/home_white.svg';
 import scheduleIcon from '@icons/calendar_white.svg';
 import doubleArrowLeft from '@icons/keyboard_double_arrow_left.svg';
 
 const AppLayout = ({ children }: PropsWithChildren) => {
 
+	const [isNavSpread, setIsNavSpread] = useState(false);
 	const router = useRouter();
 	const pathName = usePathname();
 	const firstPathName = pathName.split('/')[1];
@@ -115,6 +117,8 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 								alt="double arrow left"
 								width={28}
 								height={28}
+								onClick={() => setIsNavSpread(!isNavSpread)}
+								rotate={isNavSpread ? "rotate(180deg)" : "rotate(0deg)"}
 							/>
 						</NavControlBtnWrapper>
 						{children}
@@ -165,13 +169,19 @@ const NavControlBtnWrapper = styled.i({
 	left: "-36px",
 	top: "20px",
 	borderTopLeftRadius: "12px",
-	borderBottomLeftRadius: "12px"
+	borderBottomLeftRadius: "12px",
+	cursor: "pointer"
 })
-const NavControlBtn = styled(Image)({
-	position: "absolute",
-	top: "50%",
-	left: "50%",
-	transform: "translate(-50%, -50%)"
-})
+const NavControlBtn = styled(Image)<CSS_TYPE>(
+	{
+		position: "absolute",
+		top: "50%",
+		left: "50%",
+		transition: "all 0.3s ease-out"
+	},
+	props => ({
+		transform: "translate(-50%, -50%) " + props.rotate
+	})
+)
 
 export default AppLayout;

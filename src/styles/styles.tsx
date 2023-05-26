@@ -64,3 +64,57 @@ export const globalStyles = (
     `}
   />
 );
+
+export type CSS_TYPE = {
+  width?: string | number;
+  minWidth?: string | number;
+  maxWidth?: string | number;
+  height?: string | number;
+  minHeight?: string | number;
+  maxHeight?: string | number;
+  textAlign?: any;
+  fontSize?: string;
+  fontWeight?: string;
+  position?: any;
+  top?: string | number;
+  bottom?: string | number;
+  left?: string | number;
+  right?: string | number;
+  padding?: string | number;
+  margin?: string | number;
+  display?: string;
+  alignItems?: string;
+  justifyContent?: string;
+  backgroundColor?: string;
+  background?: string;
+  backgroundImage?: string;
+  backgroundRepeat?: string;
+  backgroundSize?: string;
+  border?: string;
+  borderColor?: string;
+  borderTop?: string;
+  borderBottom?: string;
+  borderLeft?: string;
+  borderRight?: string;
+  borderRadius?: string;
+  borderTopLeftRadius?: string | number;
+  borderTopRightRadius?: string | number;
+  borderBottomLeftRadius?: string | number;
+  borderBottomRightRadius?: string | number;
+  transition?: string;
+  transform?: string;
+  opacity?: string | number;
+  hovercolor?: string;
+  hoveropacity?: string | number;
+  hoverbackground?: string;
+  cursor?: string;
+  zIndex?: string | number;
+  animation?: string;
+  animationDelay?: string;
+  animationDuration?: string | number;
+  rotate?: string;
+
+  /* Etc */
+  isActive?: boolean;
+  RadioChecked?: boolean;
+}
