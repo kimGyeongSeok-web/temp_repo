@@ -19,6 +19,7 @@ export const globalStyles = (
 
       :root {
         --business-color: rgba(41, 77, 97, 100);
+        --business-sub-color: rgba(101, 165, 185, 100);
         --basic-white-color: rgba(255, 255, 255, 100);
         --basic-red-color: rgba(250, 8, 95, 100);
         --basic-black-color: rgba(58, 58, 58, 100);

@@ -24,7 +24,7 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 				<LayoutContainer>
 					<NavContainer>
 						<nav>
-							<div>로고</div>
+							<LogoWraaper>로고</LogoWraaper>
 							<NavLists>
 								<NavList>
 									<Image
@@ -142,16 +142,35 @@ const NavContainer = styled.div({
 	position: 'relative',
 	width: '12%',
 	height: 'calc(100vh - 48px)',
-	padding: '12px',
+	padding: "0 20px 0 0"
 });
-const NavLists = styled.ul({});
+const LogoWraaper = styled.div({
+	minHeight: "8vh"
+})
+const NavLists = styled.ul({
+	margin: "16px 0 0 0"
+});
 const NavList = styled.li({
 	display: 'flex',
 	alignItems: 'center',
 	fontSize: '16px',
+	padding: "12px",
+	margin: "8px 0",
 	span: {
 		margin: '0 0 0 12px',
 	},
+	cursor: "pointer",
+
+	"::after": {
+		width: "0",
+		backgroundColor: "var(--business-sub-color)",
+	},
+
+	":hover": {
+		"::after": {
+			width: "100%",
+		},
+	}
 });
 const MainContainer = styled.main({
 	position: 'relative',
