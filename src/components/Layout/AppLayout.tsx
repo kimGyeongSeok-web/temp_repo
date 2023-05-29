@@ -3,13 +3,20 @@ import styled from '@emotion/styled';
 import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { CSS_TYPE } from "@styles/styles";
-import homeIcon from '@icons/home_white.svg';
-import scheduleIcon from '@icons/calendar_white.svg';
 import doubleArrowLeft from '@icons/keyboard_double_arrow_left.svg';
+import homeIcon from '@icons/home_white.svg'; // 홈
+import scheduleIcon from '@icons/calendar_white.svg'; // 일정 관리
+import customerIcon from "@icons/customer_white.svg"; // 회원 관리
+import coachIcon from "@icons/coach_white.svg"; // 코치 관리
+import courtIcon from "@icons/court_white.svg"; // 코트 관리
+import lessonIcon from "@icons/lesson_coupon_white.svg"; // 레슨권 관리
+import communityIcon from "@icons/commuinty_white.svg"; // 커뮤니티 관리
+import statisticsIcon from "@icons/statistics_white.svg"; // 통계
+import settingIcon from "@icons/setting_white.svg"; // 설정
 
 const AppLayout = ({ children }: PropsWithChildren) => {
 
-	const [isNavSpread, setIsNavSpread] = useState(false);
+	const [isNavSpread, setIsNavSpread] = useState(true);
 	const router = useRouter();
 	const pathName = usePathname();
 	const firstPathName = pathName.split('/')[1];
@@ -21,12 +28,20 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 			{firstPathName === 'login' ? (
 				<>{children}</>
 			) : (
-				<LayoutContainer>
-					<NavContainer>
+				<LayoutContainer
+					padding={isNavSpread ? "20px" : "20px 20px 20px 0"}
+				>
+					<NavContainer
+						width={isNavSpread ? "10%" : "5%"}
+						padding={isNavSpread ? "0 20px 0 0" : "0"}
+					>
 						<nav>
 							<LogoWraaper>로고</LogoWraaper>
 							<NavLists>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
 										src={homeIcon}
 										alt="home icon"
@@ -35,7 +50,10 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 									/>
 									<span>홈</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
 										src={scheduleIcon}
 										alt="schedule icon"
@@ -44,64 +62,85 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 									/>
 									<span>일정 관리</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={customerIcon}
+										alt="customer icon"
 										width={20}
 										height={20}
 									/>
 									<span>회원 관리</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={coachIcon}
+										alt="coach icon"
 										width={20}
 										height={20}
 									/>
 									<span>코치 관리</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={courtIcon}
+										alt="court icon"
 										width={20}
 										height={20}
 									/>
 									<span>코트 관리</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={lessonIcon}
+										alt="lesson icon"
 										width={20}
 										height={20}
 									/>
 									<span>레슨권 관리</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={communityIcon}
+										alt="community icon"
 										width={20}
 										height={20}
 									/>
 									<span>커뮤니티 관리</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={statisticsIcon}
+										alt="statistics icon"
 										width={20}
 										height={20}
 									/>
 									<span>통계</span>
 								</NavList>
-								<NavList>
+								<NavList
+									isActive={isNavSpread}
+									flexDirection={isNavSpread ? "row" : "column"}
+								>
 									<Image
-										src={homeIcon}
-										alt="home icon"
+										src={settingIcon}
+										alt="setting icon"
 										width={20}
 										height={20}
 									/>
@@ -110,7 +149,9 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 							</NavLists>
 						</nav>
 					</NavContainer>
-					<MainContainer>
+					<MainContainer
+						width={isNavSpread ? "90%" : "95%"}
+					>
 						<NavControlBtnWrapper>
 							<NavControlBtn
 								src={doubleArrowLeft}
@@ -118,10 +159,12 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 								width={28}
 								height={28}
 								onClick={() => setIsNavSpread(!isNavSpread)}
-								rotate={isNavSpread ? "rotate(180deg)" : "rotate(0deg)"}
+								rotate={isNavSpread ? "rotate(0deg)" : "rotate(180deg)"}
 							/>
 						</NavControlBtnWrapper>
-						{children}
+						<ChildrenContainer>
+							{children}
+						</ChildrenContainer>
 					</MainContainer>
 				</LayoutContainer>
 			)}
@@ -129,58 +172,107 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 	);
 };
 
-const LayoutContainer = styled.div({
-	width: '100vw',
-	height: '100vh',
-	backgroundColor: 'var(--business-color)',
-	position: 'relative',
-	color: 'var(--basic-white-color)',
-	padding: '20px',
-	display: 'flex',
-});
-const NavContainer = styled.div({
-	position: 'relative',
-	width: '12%',
-	height: 'calc(100vh - 48px)',
-	padding: "0 20px 0 0"
-});
+const LayoutContainer = styled.div<CSS_TYPE>(
+	{
+		width: '100vw',
+		height: '100vh',
+		backgroundColor: 'var(--business-color)',
+		position: 'relative',
+		color: 'var(--basic-white-color)',
+		
+		display: 'flex',
+	},
+	props => ({
+		padding: props.padding
+	})
+);
+const NavContainer = styled.div<CSS_TYPE>(
+	{
+		position: 'relative',
+		height: 'calc(100vh - 48px)',
+		transition: "all 0.35s ease-in-out"
+	},
+	props => ({
+		width: props.width,
+		padding: props.padding
+	})
+);
 const LogoWraaper = styled.div({
 	minHeight: "8vh"
 })
 const NavLists = styled.ul({
 	margin: "16px 0 0 0"
 });
-const NavList = styled.li({
-	display: 'flex',
-	alignItems: 'center',
-	fontSize: '16px',
-	padding: "12px",
-	margin: "8px 0",
-	span: {
-		margin: '0 0 0 12px',
-	},
-	cursor: "pointer",
+const NavList = styled.li<CSS_TYPE>(
+	{
+		display: 'flex',
+		position: "relative",
+		alignItems: 'center',
+		fontSize: '16px',
+		margin: "8px 0",
+		cursor: "pointer",
 
-	"::after": {
-		width: "0",
-		backgroundColor: "var(--business-sub-color)",
-	},
-
-	":hover": {
-		"::after": {
-			width: "100%",
+		img: {
+			zIndex: "2"
 		},
-	}
-});
-const MainContainer = styled.main({
-	position: 'relative',
-	width: '88%',
-	height: 'calc(100vh - 48px)',
-	backgroundColor: 'var(--basic-white-color)',
-	borderRadius: '12px',
+
+		"::before": {
+			transition: "width 0.25s",
+			position: "absolute",
+			content: "''",
+			width: "0%",
+			height: "100%",
+			top: "0",
+			left: "-6px",
+			backgroundColor: "var(--business-sub-color)",
+			borderRadius: "16px",
+			zIndex: "1"
+		},
+	},
+	props => ({
+		flexDirection: props.flexDirection,
+		padding: props.isActive ? "14px 12px" : "16px 0",
+		margin: props.isActive ? "8px 0" : "2px 0",
+
+		span: {
+			fontSize: props.isActive ? "16px" : "14px",
+			margin: props.isActive ? "0 0 0 12px" : "4px 0 0 0",
+			zIndex: "2"
+		},
+
+		"::before": {
+			left: props.isActive ? "-6px" : "0",
+			borderRadius: props.isActive ? "16px" : "0",
+		},
+
+		":hover": {
+			"::before": {
+				width: props.isActive ? "calc(100% + 12px)" : "100%",
+			},
+		}
+	})
+);
+const MainContainer = styled.main<CSS_TYPE>(
+	{
+		position: 'relative',
+		height: 'calc(100vh - 48px)',
+		backgroundColor: 'var(--basic-white-color)',
+		borderRadius: '12px',
+		transition: "all 0.35s ease-in-out",
+	},
+	props => ({
+		width: props.width
+	})
+);
+const ChildrenContainer = styled.div({
+	position: "relative",
+	width: "100%",
+	minHeight: "100%",
+	padding: "24px",
+	color: "var(--basic-black-color)"
 });
 const NavControlBtnWrapper = styled.i({
-	position: "relative",
+	position: "absolute",
 	display: "inline-block",
 	width: "36px",
 	height: "36px",

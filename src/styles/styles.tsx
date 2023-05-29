@@ -1,4 +1,12 @@
 import { Global, css } from "@emotion/react";
+import styled from "@emotion/styled";
+import Image from "next/image";
+
+export const ImageContainer = styled(Image)({
+  position: "relative",
+  width: "100%",
+  height: "100%"
+})
 
 export const globalStyles = (
   <Global
@@ -24,7 +32,9 @@ export const globalStyles = (
         --basic-red-color: rgba(250, 8, 95, 100);
         --basic-black-color: rgba(58, 58, 58, 100);
         --basic-yellow-color: rgba(250, 210, 100, 100);
-        --basic-blue-color: rgba(66, 100, 251, 100);
+        --basic-sky-blue-color: rgba(20, 180, 199, 100); // #14B4C7
+        --basic-blue-color: rgba(66, 100, 251, 100); // #4264FB
+        --basic-grey-color: rgba(222, 222, 222, 100); // #DEDEDE
 
         --primary-gradient-color: rgba();
         --positive-gradient-color: rgba();
@@ -114,8 +124,14 @@ export type CSS_TYPE = {
   animationDelay?: string;
   animationDuration?: string | number;
   rotate?: string;
+  flex?: string;
+  flexDirection?: any;
 
   /* Etc */
   isActive?: boolean;
   RadioChecked?: boolean;
-}
+};
+
+export const New = styled.i({
+
+});
