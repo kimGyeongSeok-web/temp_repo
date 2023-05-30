@@ -2,80 +2,6 @@ import { Global, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Image from "next/image";
 
-export const ImageContainer = styled(Image)({
-  position: "relative",
-  width: "100%",
-  height: "100%"
-})
-
-export const globalStyles = (
-  <Global
-    styles={css`
-      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
-
-      *,
-      *:after,
-      *:before {
-        box-sizing: border-box;
-        font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
-          Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
-          "Noto Sans KR", "Malgun Gothic", sans-serif;
-        font-weight: 300;
-        padding: 0;
-        margin: 0;
-      }
-
-      :root {
-        --business-color: rgba(41, 77, 97, 100);
-        --business-sub-color: rgba(101, 165, 185, 100);
-        --basic-white-color: rgba(255, 255, 255, 100);
-        --basic-red-color: rgba(250, 8, 95, 100);
-        --basic-black-color: rgba(58, 58, 58, 100);
-        --basic-yellow-color: rgba(250, 210, 100, 100);
-        --basic-sky-blue-color: rgba(20, 180, 199, 100); // #14B4C7
-        --basic-blue-color: rgba(66, 100, 251, 100); // #4264FB
-        --basic-grey-color: rgba(222, 222, 222, 100); // #DEDEDE
-
-        --primary-gradient-color: rgba();
-        --positive-gradient-color: rgba();
-        --negative-gradient-color: rgba();
-      }
-
-      :is(html, body) {
-        width: 100%;
-        height: auto;
-        padding: 0;
-        margin: 0;
-        -ms-overflow-style: none;
-
-        ::-webkit-scrollbar {
-          scroll-behavior: smooth;
-          display: none;
-        }
-      }
-
-      :is(ul, li) {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-      }
-
-      a {
-        text-decoration: none;
-        color: inherit;
-      }
-
-      input {
-        margin: 0;
-
-        :focus {
-          outline: none;
-        }
-      }
-    `}
-  />
-);
-
 export type CSS_TYPE = {
   width?: string | number;
   minWidth?: string | number;
@@ -131,6 +57,87 @@ export type CSS_TYPE = {
   isActive?: boolean;
   RadioChecked?: boolean;
 };
+
+export const ImageContainer = styled(Image)<CSS_TYPE>(
+  {
+    position: "relative",
+  },
+  props => ({
+    width: props.width ? props.width : "100%",
+    height: props.height ? props.height : "100%",
+    padding: props.padding ? props.padding : "auto",
+    margin: props.margin ? props.margin : "auto"
+  })
+);
+
+export const globalStyles = (
+  <Global
+    styles={css`
+      @import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css");
+
+      *,
+      *:after,
+      *:before {
+        box-sizing: border-box;
+        font-family: Pretendard, -apple-system, BlinkMacSystemFont, system-ui,
+          Roboto, "Helvetica Neue", "Segoe UI", "Apple SD Gothic Neo",
+          "Noto Sans KR", "Malgun Gothic", sans-serif;
+        font-weight: 300;
+        padding: 0;
+        margin: 0;
+      }
+
+      :root {
+        --business-color: rgba(41, 77, 97, 100);
+        --business-sub-color: rgba(101, 165, 185, 100);
+        --basic-white-color: rgba(255, 255, 255, 100);
+        --basic-red-color: rgba(250, 8, 95, 100);
+        --basic-black-color: rgba(58, 58, 58, 100);
+        --basic-yellow-color: rgba(250, 210, 100, 100);
+        --basic-sky-blue-color: rgba(20, 180, 199, 100); // #14B4C7
+        --basic-blue-color: rgba(66, 100, 251, 100); // #4264FB
+        --basic-grey-color: rgba(222, 222, 222, 100); // #DEDEDE
+        --basic-grey-2-color: rgba(234, 234, 234, 100); // #EAEAEA
+
+        --primary-gradient-color: rgba();
+        --positive-gradient-color: rgba();
+        --negative-gradient-color: rgba();
+      }
+
+      :is(html, body) {
+        width: 100%;
+        height: auto;
+        padding: 0;
+        margin: 0;
+        -ms-overflow-style: none;
+
+        ::-webkit-scrollbar {
+          scroll-behavior: smooth;
+          display: none;
+        }
+      }
+
+      :is(ul, li) {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      a {
+        text-decoration: none;
+        color: inherit;
+      }
+
+      input {
+        margin: 0;
+
+        :focus {
+          outline: none;
+        }
+      }
+    `}
+  />
+);
 
 export const New = styled.i({
 

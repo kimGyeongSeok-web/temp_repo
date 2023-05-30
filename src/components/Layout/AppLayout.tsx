@@ -179,7 +179,6 @@ const LayoutContainer = styled.div<CSS_TYPE>(
 		backgroundColor: 'var(--business-color)',
 		position: 'relative',
 		color: 'var(--basic-white-color)',
-		
 		display: 'flex',
 	},
 	props => ({

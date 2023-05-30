@@ -1,11 +1,11 @@
 import styled from "@emotion/styled";
 import ProfileManIcon from "@icons/profile_man.svg";
 import ProfileWomanIcon from "@icons/profile_woman.svg";
-import { CSS_TYPE, ImageContainer as Image }  from "@styles/styles";
+import { CSS_TYPE, ImageContainer as Image } from "@styles/styles";
 import { addNumberCommas } from "@utils/numberForm";
 
-const PreDashBoard = () =>{
-  return(
+const PreDashBoard = () => {
+  return (
     <Container>
       <ProfileContainer>
         <ProfileImageWrapper>
@@ -17,7 +17,7 @@ const PreDashBoard = () =>{
           />
         </ProfileImageWrapper>
         <ProfileInfoContainer>
-          <Name>테니스 닥터 관리자</Name>
+          <Name>관리자 관리자 관리자</Name>
           <Category>개인 사업자</Category>
           <ProfileInfo>Tel: +82-2-569-5507</ProfileInfo>
           <ProfileInfo>Address: 서울특별시 은평구 은평로11길 9 3층</ProfileInfo>
@@ -62,6 +62,7 @@ const Container = styled.div({
   display: "flex",
   border: "1px solid var(--basic-grey-color)",
   borderRadius: "25px",
+  margin: "0 0 20px 0"
 });
 const ProfileContainer = styled.div({
   position: "relative",
