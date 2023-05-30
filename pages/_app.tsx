@@ -1,4 +1,4 @@
-import AppLayout from "@components/Layout/AppLayout";
+import AppLayout from "@components/layout/AppLayout";
 import { globalStyles } from "@styles/styles";
 import type { AppProps } from "next/app";
 import Head from "next/head";

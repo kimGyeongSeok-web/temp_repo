@@ -1,6 +1,6 @@
-import DashBoardItem from "@components/Common/DashBoardItem";
+import DashBoardItem from "@components/common/DashBoardItem";
 import styled from "@emotion/styled";
-import NoResult from "@components/Common/NoResult";
+import NoResult from "@components/common/NoResult";
 import { useState } from "react";
 
 const Sales = () => {

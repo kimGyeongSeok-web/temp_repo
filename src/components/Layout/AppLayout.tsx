@@ -1,5 +1,6 @@
 import { PropsWithChildren, useState } from 'react';
 import styled from '@emotion/styled';
+import Link from "next/link";
 import { useRouter, usePathname } from 'next/navigation';
 import Image from 'next/image';
 import { CSS_TYPE } from "@styles/styles";
@@ -38,114 +39,132 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 						<nav>
 							<LogoWraaper>로고</LogoWraaper>
 							<NavLists>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={homeIcon}
-										alt="home icon"
-										width={20}
-										height={20}
-									/>
-									<span>홈</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={scheduleIcon}
-										alt="schedule icon"
-										width={20}
-										height={20}
-									/>
-									<span>일정 관리</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={customerIcon}
-										alt="customer icon"
-										width={20}
-										height={20}
-									/>
-									<span>회원 관리</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={coachIcon}
-										alt="coach icon"
-										width={20}
-										height={20}
-									/>
-									<span>코치 관리</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={courtIcon}
-										alt="court icon"
-										width={20}
-										height={20}
-									/>
-									<span>코트 관리</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={lessonIcon}
-										alt="lesson icon"
-										width={20}
-										height={20}
-									/>
-									<span>레슨권 관리</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={communityIcon}
-										alt="community icon"
-										width={20}
-										height={20}
-									/>
-									<span>커뮤니티 관리</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={statisticsIcon}
-										alt="statistics icon"
-										width={20}
-										height={20}
-									/>
-									<span>통계</span>
-								</NavList>
-								<NavList
-									isActive={isNavSpread}
-									flexDirection={isNavSpread ? "row" : "column"}
-								>
-									<Image
-										src={settingIcon}
-										alt="setting icon"
-										width={20}
-										height={20}
-									/>
-									<span>설정</span>
-								</NavList>
+								<Link href="" as="/" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={homeIcon}
+											alt="home icon"
+											width={20}
+											height={20}
+										/>
+										<span>홈</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/schedule" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={scheduleIcon}
+											alt="schedule icon"
+											width={20}
+											height={20}
+										/>
+										<span>일정 관리</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/customer" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={customerIcon}
+											alt="customer icon"
+											width={20}
+											height={20}
+										/>
+										<span>회원 관리</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/coach" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={coachIcon}
+											alt="coach icon"
+											width={20}
+											height={20}
+										/>
+										<span>코치 관리</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/court" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={courtIcon}
+											alt="court icon"
+											width={20}
+											height={20}
+										/>
+										<span>코트 관리</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/lesson" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={lessonIcon}
+											alt="lesson icon"
+											width={20}
+											height={20}
+										/>
+										<span>레슨권 관리</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/community" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={communityIcon}
+											alt="community icon"
+											width={20}
+											height={20}
+										/>
+										<span>커뮤니티 관리</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/statistics" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={statisticsIcon}
+											alt="statistics icon"
+											width={20}
+											height={20}
+										/>
+										<span>통계</span>
+									</NavList>
+								</Link>
+								<Link href="" as="/setting" passHref>
+									<NavList
+										isActive={isNavSpread}
+										flexDirection={isNavSpread ? "row" : "column"}
+									>
+										<Image
+											src={settingIcon}
+											alt="setting icon"
+											width={20}
+											height={20}
+										/>
+										<span>설정</span>
+									</NavList>
+								</Link>
 							</NavLists>
 						</nav>
 					</NavContainer>

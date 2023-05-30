@@ -1,8 +1,8 @@
 import Head from 'next/head'
 import styled from '@emotion/styled'
-import CoachLesson from '@components/Home/CoachLesson'
-import PreDashBoard from '@components/Home/PreDashBoard'
-import Sales from '@components/Home/Sales'
+import CoachLesson from '@components/home/CoachLesson'
+import PreDashBoard from '@components/home/PreDashBoard'
+import Sales from '@components/home/Sales'
 
 export default function Home() {
 
