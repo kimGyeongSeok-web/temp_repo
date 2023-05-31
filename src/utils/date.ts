@@ -2,52 +2,53 @@
  * getDay(): 주어진 날짜의 첫 번째 날짜의 요일 정보를 반환
  * getDate(): 주어진 날짜의 일을 반환(ex, 28일)
  */
-
 const STRING_WEAK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
 /**
- * 입력 날짜의 주차를 반환(ex, 1주차)
+ * 입력 날짜에 해당하는 주차 및 리스트 반환
  * @param { args } Date 객체
- * @returns (ex, 1주차)
+ * @returns Object Array
  */
-export const getWeek = (args?: Date) =>{
+export const getWeekList = (args?: Date): object =>{
 
-  const date = new Date(args ? args : "");
-  const currentDate = date.getDate();
-  const firstDay = new Date(date.setDate(1)).getDay();
-  
-  return Math.ceil((currentDate + firstDay) / 7);
-};
+  const date = args ? new Date(args) : new Date();
 
-
-export const getWeekList = (args: Date) =>{
-
-  // args > 월이 바뀌는 값
-
-  const date = new Date("2023-06-30");
-
-  console.log(date);
-  
   const calendarYear = date.getFullYear();
   const calendarMonth = date.getMonth() + 1;
+  let calendarDay = 1;
 
   const currentDate = date.getDate();
   const monthStartDay = new Date(calendarYear, date.getMonth(), 1);
   const monthLastDate = new Date(calendarYear, calendarMonth, 0);
 
   const calendarMonthStartDay = monthStartDay.getDay();
-  const calendarMonthLastDate = monthLastDate.getDate()
+  const calendarMonthLastDate = monthLastDate.getDate();
 
   const calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7); // (당일 + 첫요일)
 
-  console.log(calendarMonthStartDay);
-  console.log(STRING_WEAK[calendarMonthStartDay])
-  console.log(calendarMonthLastDate);
-  console.log(calendarWeekCount);
+  let dateList = [];
+  let isCheckMonthStartDay = 0;
+  
+  for(let monthWeekCount = 1; monthWeekCount <= calendarWeekCount; monthWeekCount++){
+    for(let weekCount = 0; weekCount < 7; weekCount++){
+      if(calendarMonthStartDay <= isCheckMonthStartDay && calendarDay <= calendarMonthLastDate){
+        dateList.push({
+          week: monthWeekCount,
+          date: calendarDay,
+          day: STRING_WEAK[weekCount]
+        })
+        calendarDay++;
+      };
+      isCheckMonthStartDay++;
+    };
+  };
 
-  // 첫 째날과 요일
-  // 마지막 날과 요일
-  // 몇주차까지 있는지
+  return {
+    calendarYear: calendarYear,
+    calendarMonth: calendarMonth,
+    currentDate: currentDate,
+    dateList: dateList
+  };
 };
 
 

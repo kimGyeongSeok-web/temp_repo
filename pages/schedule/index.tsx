@@ -5,30 +5,51 @@ import { useState } from "react";
 
 const SchedulePage = () => {
 
+  const coachArr = [
+    {
+      id: "",
+      name: "전체",
+      value: "",
+      status: "active"
+    },
+    {
+      id: "od-3alsdla-edkasi-dkasdk",
+      name: "Jane",
+      value: "",
+      status: "active"
+    },
+    {
+      id: "s3-f0ksdla-edkasi-dkasdk",
+      name: "Marin",
+      value: "",
+      status: "active"
+    },
+    {
+      id: "kz-3algsia-edkasi-dkasdk",
+      name: "Taeil",
+      value: "",
+      status: "active"
+    }
+  ]
+
   // 글로벌 탭 리스트: 코치
-  const [coachList, ] = useState();
+  const [currentCoach, setCurrentCoach] = useState<string>("all");
+  const [coachList,] = useState(coachArr);
+
+  // 주차별 및 요일별 보기 구분
+  const [viewCategory, setViewCategory] = useState();
 
   // 로컬 탭 리스트
 
-  // 주차별
-  // Default는 오늘 날짜기준 월을 구하기
-  const date = new Date();
-  
   // 월을 기준으로 주차 및 날짜 구분하기
-  const weekList = getWeekList(date);
+  const weekList = getWeekList();
 
-  // 월이 바뀌면 바꿔서 가져오기
-
-  // > 그에 따른 시작날짜 및 종료날짜를 가져오기. 기준은 월화수목금 토일
-
-  // 요일별
-
-
+  console.log(weekList);
 
   return (
     <>
       <PageHeader title={"스케줄"} />
-      <TabList />
+      <TabList state={currentCoach} setState={setCurrentCoach} list={coachList} />
       <TabList />
     </>
   )

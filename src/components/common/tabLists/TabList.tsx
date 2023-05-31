@@ -1,17 +1,23 @@
 import styled from "@emotion/styled";
-import { ReactElement } from "react";
+import { Dispatch, ReactElement, SetStateAction } from "react";
 
 type ObjectProps = { [key: string]: string };
 
 interface ListProps {
-  state?: any;
-  setState?: any;
+  state?: string;
+  setState?: Dispatch<SetStateAction<string>>;
   list?: Array<ObjectProps>;
   borderBottom?: string;
   onClick?: () => void;
 };
 
-const TabList = ({ }: ListProps): ReactElement => {
+const TabList = ({ state, setState, list, borderBottom, onClick }: ListProps): ReactElement => {
+
+  console.log(state);
+  // console.log(setState);
+  console.log(list);
+  console.log(borderBottom);
+
   return (
     <Container>
       <Lists>
