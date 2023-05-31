@@ -53,7 +53,7 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 										<span>홈</span>
 									</NavList>
 								</Link>
-								<Link href="" as="/schedule" passHref>
+								<Link href="/schedule" passHref>
 									<NavList
 										isActive={isNavSpread}
 										flexDirection={isNavSpread ? "row" : "column"}
