@@ -1,56 +1,66 @@
+import { useEffect, useState } from "react";
+import { v4 as uuidV4 } from "uuid";
 import PageHeader from "@components/common/PageHeader";
-import TabList from "@components/common/tabLists/TabList";
+import TabList from "@components/common/TabList";
+import ButtonContainer from "@components/schedule/ButtonContainer";
 import { getWeekList } from "@utils/date";
-import { useState } from "react";
+import { WeekListProps } from "src/interfaces/calendar";
+import Calendar from "@components/schedule/Calendar";
 
 const SchedulePage = () => {
 
+  // TODO Data Fetching
   const coachArr = [
     {
-      id: "",
+      id: uuidV4(),
       name: "전체",
-      value: "",
+      value: "all",
       status: "active"
     },
     {
-      id: "od-3alsdla-edkasi-dkasdk",
+      id: uuidV4(),
       name: "Jane",
-      value: "",
+      value: "jane",
       status: "active"
     },
     {
-      id: "s3-f0ksdla-edkasi-dkasdk",
+      id: uuidV4(),
       name: "Marin",
-      value: "",
+      value: "marin",
       status: "active"
     },
     {
-      id: "kz-3algsia-edkasi-dkasdk",
+      id: uuidV4(),
       name: "Taeil",
-      value: "",
+      value: "taeil",
       status: "active"
     }
-  ]
+  ];
 
   // 글로벌 탭 리스트: 코치
-  const [currentCoach, setCurrentCoach] = useState<string>("all");
+  const [currentCoach, setCurrentCoach] = useState<string>(coachArr[0].id);
   const [coachList,] = useState(coachArr);
 
   // 주차별 및 요일별 보기 구분
-  const [viewCategory, setViewCategory] = useState();
-
-  // 로컬 탭 리스트
+  const [viewCategory, setViewCategory] = useState("week");
 
   // 월을 기준으로 주차 및 날짜 구분하기
-  const weekList = getWeekList();
+  const { calendarYear, calendarMonth, currentDate, weekTabList, dateList }: WeekListProps = getWeekList();
 
-  console.log(weekList);
+  const [currentWeek, setCurrentWeek] = useState<string>(weekTabList[0].id);
+  const [weekList,] = useState(weekTabList);
+
+  useEffect(() => {
+
+  }, [])
 
   return (
     <>
       <PageHeader title={"스케줄"} />
       <TabList state={currentCoach} setState={setCurrentCoach} list={coachList} />
-      <TabList />
+      <ButtonContainer viewCategory={viewCategory} setViewCategory={setViewCategory} />
+      <TabList state={currentWeek} setState={setCurrentWeek} list={weekList} borderBottom={true} />
+      <Calendar />
     </>
   )
 }

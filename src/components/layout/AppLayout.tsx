@@ -22,8 +22,6 @@ const AppLayout = ({ children }: PropsWithChildren) => {
 	const pathName = usePathname();
 	const firstPathName = pathName.split('/')[1];
 
-	console.log(pathName);
-
 	return (
 		<>
 			{firstPathName === 'login' ? (

@@ -90,15 +90,17 @@ export const globalStyles = (
       :root {
         --business-color: rgba(41, 77, 97, 100);
         --business-sub-color: rgba(101, 165, 185, 100);
-        --basic-white-color: rgba(255, 255, 255, 100);
+        --basic-white-color: rgba(254, 254, 254, 100); // #FEFEFE
         --basic-red-color: rgba(250, 8, 95, 100);
-        --basic-black-color: rgba(58, 58, 58, 100);
+        --basic-black-color: rgba(58, 58, 58, 100); // #3A3A3A
         --basic-yellow-color: rgba(250, 210, 100, 100);
         --basic-sky-blue-color: rgba(20, 180, 199, 100); // #14B4C7
         --basic-blue-color: rgba(66, 100, 251, 100); // #4264FB
         --basic-grey-color: rgba(222, 222, 222, 100); // #DEDEDE
         --basic-grey-2-color: rgba(234, 234, 234, 100); // #EAEAEA
 
+        --business-active-color: rgba(101, 165, 185, 100); // #65A5B9
+        --deactive-color: rgba(204, 204, 204, 100); // #CCCCCC
         --primary-gradient-color: rgba();
         --positive-gradient-color: rgba();
         --negative-gradient-color: rgba();
@@ -142,3 +144,32 @@ export const globalStyles = (
 export const New = styled.i({
 
 });
+
+export const Button = styled.button<CSS_TYPE>(
+  {
+    transition: "transform 0.2s ease-in-out",
+    appearance: "none",
+    backfaceVisibility: "hidden",
+    WebkitTransform: "translateZ(0)",
+    WebkitFontSmoothing: "subpixel-antialiased",
+    cursor: "pointer",
+
+    ":hover": {
+      transform: "translate3d(0, 0, 0) translateZ(0) scale(1.1)",
+    },
+
+    ":active": {
+      transform: "translate3d(0, 0, 0) translateZ(0) scale(0.95)",
+    }
+  },
+  props =>({
+    fontSize: props.fontSize,
+    fontWeight: props.fontWeight,
+    padding: props.padding ? props.padding : "0.5rem 1.1rem",
+    margin: props.margin ? props.margin : "0",
+    border: props.border ? props.border : "0",
+    backgroundColor: props.backgroundColor ? props.backgroundColor : "transparent",
+    color: props.color ? props.color : "",
+    borderRadius: props.borderRadius ? props.borderRadius : "12px"
+  })
+);

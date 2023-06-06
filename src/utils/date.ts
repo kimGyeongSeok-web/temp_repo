@@ -1,3 +1,7 @@
+import { v4 as uuidV4 } from "uuid";
+import { numberZeroFillFormat } from "./numberForm";
+import { WeekListProps } from "src/interfaces/calendar";
+
 /**
  * getDay(): 주어진 날짜의 첫 번째 날짜의 요일 정보를 반환
  * getDate(): 주어진 날짜의 일을 반환(ex, 28일)
@@ -9,14 +13,14 @@ const STRING_WEAK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
  * @param { args } Date 객체
  * @returns Object Array
  */
-export const getWeekList = (args?: Date): object =>{
+export const getWeekList = (args?: Date): WeekListProps =>{
 
   const date = args ? new Date(args) : new Date();
 
   const calendarYear = date.getFullYear();
   const calendarMonth = date.getMonth() + 1;
   let calendarDay = 1;
-
+  
   const currentDate = date.getDate();
   const monthStartDay = new Date(calendarYear, date.getMonth(), 1);
   const monthLastDate = new Date(calendarYear, calendarMonth, 0);
@@ -27,13 +31,25 @@ export const getWeekList = (args?: Date): object =>{
   const calendarWeekCount = Math.ceil((calendarMonthStartDay + calendarMonthLastDate) / 7); // (당일 + 첫요일)
 
   let dateList = [];
+  let weekTabList = [];
   let isCheckMonthStartDay = 0;
   
   for(let monthWeekCount = 1; monthWeekCount <= calendarWeekCount; monthWeekCount++){
+
+    let dateWeekList = [];
+    let startDate: number = 0;
+    let endDate: number = 0;
+
     for(let weekCount = 0; weekCount < 7; weekCount++){
+
+      if(weekCount === 0)
+        startDate = calendarDay;
+
+      if(weekCount === 6)
+        endDate = calendarDay > calendarMonthLastDate ? calendarMonthLastDate : calendarDay;
+
       if(calendarMonthStartDay <= isCheckMonthStartDay && calendarDay <= calendarMonthLastDate){
-        dateList.push({
-          week: monthWeekCount,
+        dateWeekList.push({
           date: calendarDay,
           day: STRING_WEAK[weekCount]
         })
@@ -41,35 +57,29 @@ export const getWeekList = (args?: Date): object =>{
       };
       isCheckMonthStartDay++;
     };
+
+    const startWeekDate = numberZeroFillFormat(calendarMonth, 2) + "." + numberZeroFillFormat(startDate, 2);
+    const endWeekDate = numberZeroFillFormat(calendarMonth, 2) + "." + numberZeroFillFormat(endDate, 2);
+
+    weekTabList.push({
+      id: uuidV4(),
+      name: `${monthWeekCount}주차 (${startWeekDate} ~ ${endWeekDate})`,
+      startWeekDate: startWeekDate,
+      endWeekDate: endWeekDate,
+      value: startWeekDate + " ~ " + endWeekDate
+    });
+
+    dateList.push({
+      weekNumber: monthWeekCount,
+      dateWeekList: dateWeekList
+    });
   };
 
   return {
     calendarYear: calendarYear,
     calendarMonth: calendarMonth,
     currentDate: currentDate,
+    weekTabList: weekTabList,
     dateList: dateList
   };
 };
-
-
-// const date = new Date(args ? args : "");
-  
-//   const todayWeek = date.getDay();
-//   const currentDate = date.getDate();
-//   const firstDay = new Date(date.setDate(1)).getDay();
-//   const lastDay = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate(); // 주어진 날짜의 마지막 날짜
-
-  
-
-//   let dates = [];
-//   for(let index = 1; index <= 7; index++){
-//     dates.push({
-//       week: 1,
-//     });
-//   }
-
-//   // console.log(date);
-//   // console.log(todayWeek);
-//   // console.log(currentDate);
-//   // console.log(lastDay);
-//   console.log(dates);
