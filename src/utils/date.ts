@@ -13,14 +13,14 @@ const STRING_WEAK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
  * @param { args } Date 객체
  * @returns Object Array
  */
-export const getWeekList = (args?: Date): WeekListProps =>{
+export const getWeekList = (args?: Date): WeekListProps => {
 
   const date = args ? new Date(args) : new Date();
 
   const calendarYear = date.getFullYear();
   const calendarMonth = date.getMonth() + 1;
   let calendarDay = 1;
-  
+
   const currentDate = date.getDate();
   const monthStartDay = new Date(calendarYear, date.getMonth(), 1);
   const monthLastDate = new Date(calendarYear, calendarMonth, 0);
@@ -33,22 +33,22 @@ export const getWeekList = (args?: Date): WeekListProps =>{
   let dateList = [];
   let weekTabList = [];
   let isCheckMonthStartDay = 0;
-  
-  for(let monthWeekCount = 1; monthWeekCount <= calendarWeekCount; monthWeekCount++){
+
+  for (let monthWeekCount = 1; monthWeekCount <= calendarWeekCount; monthWeekCount++) {
 
     let dateWeekList = [];
     let startDate: number = 0;
     let endDate: number = 0;
 
-    for(let weekCount = 0; weekCount < 7; weekCount++){
+    for (let weekCount = 0; weekCount < 7; weekCount++) {
 
-      if(weekCount === 0)
+      if (weekCount === 0)
         startDate = calendarDay;
 
-      if(weekCount === 6)
+      if (weekCount === 6)
         endDate = calendarDay > calendarMonthLastDate ? calendarMonthLastDate : calendarDay;
 
-      if(calendarMonthStartDay <= isCheckMonthStartDay && calendarDay <= calendarMonthLastDate){
+      if (calendarMonthStartDay <= isCheckMonthStartDay && calendarDay <= calendarMonthLastDate) {
         dateWeekList.push({
           date: calendarDay,
           day: STRING_WEAK[weekCount]
@@ -83,3 +83,17 @@ export const getWeekList = (args?: Date): WeekListProps =>{
     dateList: dateList
   };
 };
+
+export const getTimeZoneList = () => {
+
+  let timeList = [];
+  for (let index = 0; index <= 24; index++) {
+    timeList.push(
+      `${numberZeroFillFormat(index, 2)}:00`
+    );
+  };
+
+  return {
+    timeList: timeList
+  }
+}

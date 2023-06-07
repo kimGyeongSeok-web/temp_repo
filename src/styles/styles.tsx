@@ -58,18 +58,6 @@ export type CSS_TYPE = {
   RadioChecked?: boolean;
 };
 
-export const ImageContainer = styled(Image)<CSS_TYPE>(
-  {
-    position: "relative",
-  },
-  props => ({
-    width: props.width ? props.width : "100%",
-    height: props.height ? props.height : "100%",
-    padding: props.padding ? props.padding : "auto",
-    margin: props.margin ? props.margin : "auto"
-  })
-);
-
 export const globalStyles = (
   <Global
     styles={css`
@@ -145,6 +133,19 @@ export const New = styled.i({
 
 });
 
+export const ImageContainer = styled(Image)<CSS_TYPE>(
+  {
+    position: "relative",
+  },
+  props => ({
+    width: props.width ? props.width : "100%",
+    height: props.height ? props.height : "100%",
+    padding: props.padding ? props.padding : "auto",
+    margin: props.margin ? props.margin : "auto",
+    cursor: props.cursor
+  })
+);
+
 export const Button = styled.button<CSS_TYPE>(
   {
     transition: "transform 0.2s ease-in-out",
@@ -162,7 +163,10 @@ export const Button = styled.button<CSS_TYPE>(
       transform: "translate3d(0, 0, 0) translateZ(0) scale(0.95)",
     }
   },
-  props =>({
+  props => ({
+    display: props.display,
+    justifyContent: props.justifyContent,
+    alignItems: props.alignItems,
     fontSize: props.fontSize,
     fontWeight: props.fontWeight,
     padding: props.padding ? props.padding : "0.5rem 1.1rem",

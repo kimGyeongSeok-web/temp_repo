@@ -283,7 +283,9 @@ const MainContainer = styled.main<CSS_TYPE>(
 const ChildrenContainer = styled.div({
 	position: "relative",
 	width: "100%",
-	minHeight: "100%",
+	height: "100%",
+	// minHeight: "100%",
+	// maxHeight: "100%",
 	padding: "24px",
 	color: "var(--basic-black-color)"
 });

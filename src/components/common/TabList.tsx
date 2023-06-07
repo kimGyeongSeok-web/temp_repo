@@ -23,6 +23,7 @@ const TabList = ({ state, setState, list, borderBottom }: ListProps): ReactEleme
                 onClick={() => setState(item.id)}
                 color={item.id === state ? "var(--basic-black-color)" : "var(--deactive-color)"}
                 fontWeight={item.id === state ? "500" : "300"}
+                borderBottom={item.id === state ? "2px solid var(--basic-black-color)" : ""}
               >{item.name}</List>
             )
           })
@@ -42,18 +43,19 @@ const Lists = styled.ul<CSS_TYPE>(
   },
   props => ({
     borderBottom: props.borderBottom,
-    padding: props.borderBottom ? "8px 0" : ""
   })
 );
 const List = styled.li<CSS_TYPE>(
   {
     margin: "0 36px 0 0",
+    padding: "0 0 8px 0",
     // transition: "all 0.2s ease-in-out",
     cursor: "pointer"
   },
   props => ({
     color: props.color,
-    fontWeight: props.fontWeight
+    fontWeight: props.fontWeight,
+    borderBottom: props.borderBottom
   })
 );
 

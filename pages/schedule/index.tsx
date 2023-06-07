@@ -37,6 +37,29 @@ const SchedulePage = () => {
     }
   ];
 
+  const courtArr = [
+    {
+      id: uuidV4(),
+      name: "코트1",
+      value: "court1"
+    },
+    {
+      id: uuidV4(),
+      name: "코트2",
+      value: "court2"
+    },
+    {
+      id: uuidV4(),
+      name: "코트3",
+      value: "court4",
+    },
+    {
+      id: uuidV4(),
+      name: "코트4",
+      value: "court4",
+    }
+  ];
+
   // 글로벌 탭 리스트: 코치
   const [currentCoach, setCurrentCoach] = useState<string>(coachArr[0].id);
   const [coachList,] = useState(coachArr);
@@ -47,8 +70,11 @@ const SchedulePage = () => {
   // 월을 기준으로 주차 및 날짜 구분하기
   const { calendarYear, calendarMonth, currentDate, weekTabList, dateList }: WeekListProps = getWeekList();
 
+  // 주차별 탭 목록
   const [currentWeek, setCurrentWeek] = useState<string>(weekTabList[0].id);
   const [weekList,] = useState(weekTabList);
+
+  const [courtList,] = useState(courtArr);
 
   useEffect(() => {
 
@@ -60,7 +86,11 @@ const SchedulePage = () => {
       <TabList state={currentCoach} setState={setCurrentCoach} list={coachList} />
       <ButtonContainer viewCategory={viewCategory} setViewCategory={setViewCategory} />
       <TabList state={currentWeek} setState={setCurrentWeek} list={weekList} borderBottom={true} />
-      <Calendar />
+      <Calendar
+        courtList={courtList}
+        calendarYear={calendarYear}
+        calendarMonth={calendarMonth}
+      />
     </>
   )
 }
