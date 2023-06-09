@@ -97,3 +97,29 @@ export const getTimeZoneList = () => {
     timeList: timeList
   }
 }
+
+export const getPrevNextMonth = (year: number, month: number) =>{
+
+  const dateMonth = month - 1;
+
+  const prevDate = new Date();
+  prevDate.setFullYear(month === 1 ? year - 1 : year);
+  prevDate.setMonth(month === 1 ? 11 : dateMonth - 1);
+
+  const nextDate = new Date();
+  nextDate.setFullYear(month === 12 ? year + 1 : year);
+  nextDate.setMonth(month === 12 ? 0 : dateMonth + 1);
+
+  return {
+    prevDate: {
+      fullDate: prevDate.getFullYear() + "." + (prevDate.getMonth() + 1),
+      year: prevDate.getFullYear(),
+      month: prevDate.getMonth() + 1
+    },
+    nextDate: {
+      fullDate: nextDate.getFullYear() + "." + (nextDate.getMonth() + 1),
+      year: nextDate.getFullYear(),
+      month: nextDate.getMonth() + 1
+    },
+  };
+};

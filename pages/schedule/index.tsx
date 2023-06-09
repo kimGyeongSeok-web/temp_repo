@@ -71,6 +71,10 @@ const SchedulePage = () => {
   const { calendarYear, calendarMonth, currentDate, weekTabList, dateList }: WeekListProps = getWeekList();
 
   // 주차별 탭 목록
+  const [calendarDate, setCalendarDate] = useState({
+    year: calendarYear,
+    month: calendarMonth,
+  });
   const [currentWeek, setCurrentWeek] = useState<string>(weekTabList[0].id);
   const [weekList,] = useState(weekTabList);
 
@@ -88,8 +92,8 @@ const SchedulePage = () => {
       <TabList state={currentWeek} setState={setCurrentWeek} list={weekList} borderBottom={true} />
       <Calendar
         courtList={courtList}
-        calendarYear={calendarYear}
-        calendarMonth={calendarMonth}
+        calendarDate={calendarDate}
+        setCalendarDate={setCalendarDate}
       />
     </>
   )

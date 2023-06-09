@@ -5,15 +5,27 @@ import { ObjectProps } from "@interfaces/common";
 import SingleArrowLeftIcon from "@icons/grey_single_arrow_left.svg";
 import SingleArrowRightIcon from "@icons/grey_single_arrow_right.svg";
 import WriteIcon from "@icons/edit_white.svg";
-import { getTimeZoneList } from "@utils/date";
+import { getTimeZoneList, getPrevNextMonth } from "@utils/date";
+import { Dispatch, SetStateAction } from "react";
+
+interface T{
+  [key: string]: number;
+};
 
 interface CalendarProps {
   courtList: Array<ObjectProps<string>>;
-  calendarYear: number;
-  calendarMonth: number;
+  calendarDate: T;
+  setCalendarDate: Dispatch<SetStateAction<{
+    year: number;
+    month: number;
+  }>>
 };
 
-const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => {
+const Calendar = ({ courtList, calendarDate, setCalendarDate }: CalendarProps) => {
+
+  const { year, month } = calendarDate;
+
+  const { timeList } = getTimeZoneList();
 
   // 몇년 몇월인지
 
@@ -23,9 +35,22 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
 
   // 예약리스트
 
-  const { timeList } = getTimeZoneList();
+  const onClickPrevMonthHandler = () =>{
+    const { prevDate } = getPrevNextMonth(year, month);
+    setCalendarDate({
+      year: prevDate.year,
+      month: prevDate.month
+    });
+  };
 
-  console.log(timeList);
+  const onClickNextMonthHandler = () =>{
+    
+    const { nextDate } = getPrevNextMonth(year, month);
+    setCalendarDate({
+      year: nextDate.year,
+      month: nextDate.month
+    });
+  };
 
   return (
     <Container>
@@ -50,14 +75,16 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
             width={24}
             height={24}
             cursor={"pointer"}
+            onClick={onClickPrevMonthHandler}
           />
-          {calendarYear}년 {calendarMonth}월
+          {year}년 {month}월
           <Image
             src={SingleArrowRightIcon}
             alt="next button"
             width={24}
             height={24}
             cursor={"pointer"}
+            onClick={onClickNextMonthHandler}
           />
         </CalendarHeaderContainer>
         <HeaderBtnContainer>
@@ -112,15 +139,17 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
       </WeekHeaderContainer>
       <CalendarContainer>
         <TimeZoneContainer>
-          {
-            (timeList && timeList.length > 0) && timeList.map((item) => {
-              return (
-                <div key={item}>
-                  {item}
-                </div>
-              )
-            })
-          }
+          <ul>
+            {
+              (timeList && timeList.length > 0) && timeList.map((item) => {
+                return (
+                  <TimeList key={item}>
+                    {item}
+                  </TimeList>
+                )
+              })
+            }
+          </ul>
         </TimeZoneContainer>
         <WeekContainer>
           <DateContainer>
@@ -147,6 +176,7 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
           </DateContainer>
           <DateContainer>
             <DateEventLists>
+            <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
@@ -155,24 +185,6 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
@@ -186,6 +198,59 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
           </DateContainer>
           <DateContainer>
             <DateEventLists>
+            <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+            </DateEventLists>
+          </DateContainer>
+          <DateContainer>
+            <DateEventLists>
+            <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+            </DateEventLists>
+          </DateContainer>
+          <DateContainer>
+            <DateEventLists>
+            <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
+              <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
               <DateEventList>월요일 컨테이너 영역</DateEventList>
@@ -249,7 +314,7 @@ const Calendar = ({ courtList, calendarYear, calendarMonth }: CalendarProps) => 
 
 const Container = styled.div({
   position: "relative",
-  height: "80%",
+  height: "calc(80% - 16px)",
   margin: "8px 0 0 0",
   padding: "8px 0 0 0"
 });
@@ -290,15 +355,15 @@ const HeaderBtnContainer = styled.div({
 const WeekHeaderContainer = styled.div({
   position: "relative",
   display: "flex",
-  width: "92%",
-  margin: "0 0 0 8%",
+  width: "100%",
+  padding: "0 0 0 6%",
   borderBottom: "1px solid var(--basic-grey-color)",
 });
 const WeekDayContainer = styled.div({
   width: "calc(100% / 7)",
   borderLeft: "1px solid var(--basic-grey-color)",
 
-  ":nth-last-child(1)": {
+  ":nth-last-of-type(1)": {
     borderRight: "1px solid var(--basic-grey-color)"
   }
 });
@@ -317,25 +382,34 @@ const CalendarContainer = styled.div({
   height: "82%",
   display: "flex",
   overflowY: "scroll",
+
+  "::-webkit-scrollbar": {
+    scrollBehavior: "smooth",
+    display: "none"
+  }
 });
 const TimeZoneContainer = styled.div({
   position: "relative",
-  width: "8%",
+  width: "6%",
   height: "calc(100% - 36px)",
-  padding: "36px 0 0 0"
+  padding: "4px 0 0 0",
+});
+const TimeList = styled.li({
+  position: "relative",
+  height: "52px",
+  textAlign: "center",
 });
 const WeekContainer = styled.div({
   position: "relative",
-  width: "92%",
+  width: "94%",
   height: "100%",
   display: "flex",
   fontSize: "0.8rem"
 });
 const DateContainer = styled.div({
   width: "calc(100% / 7)",
-  borderLeft: "1px solid var(--basic-grey-color)",
 
-  ":nth-last-child(1)": {
+  ":nth-last-of-type(1) > ul > li": {
     borderRight: "1px solid var(--basic-grey-color)"
   }
 });
@@ -344,8 +418,11 @@ const DateEventLists = styled.ul({
 });
 const DateEventList = styled.li(
   {
-    height: "48px",
+    position: "relative",
+    height: "52px",
+    padding: "0.4rem 0.6rem",
     borderBottom: "1px solid var(--basic-grey-color)",
+    borderLeft: "1px solid var(--basic-grey-color)",
   },
   props => ({
 
