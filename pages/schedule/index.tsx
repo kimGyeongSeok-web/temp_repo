@@ -64,25 +64,52 @@ const SchedulePage = () => {
   const [currentCoach, setCurrentCoach] = useState<string>(coachArr[0].id);
   const [coachList,] = useState(coachArr);
 
+  // 코트 목록
+  const [courtList,] = useState(courtArr);
+
   // 주차별 및 요일별 보기 구분
   const [viewCategory, setViewCategory] = useState("week");
 
   // 월을 기준으로 주차 및 날짜 구분하기
-  const { calendarYear, calendarMonth, currentDate, weekTabList, dateList }: WeekListProps = getWeekList();
+  const [calendarInfo, setCalendarInfo] = useState<WeekListProps>(getWeekList());
 
   // 주차별 탭 목록
   const [calendarDate, setCalendarDate] = useState({
-    year: calendarYear,
-    month: calendarMonth,
+    year: calendarInfo.calendarYear,
+    month: calendarInfo.calendarMonth,
   });
-  const [currentWeek, setCurrentWeek] = useState<string>(weekTabList[0].id);
-  const [weekList,] = useState(weekTabList);
+  const [currentWeek, setCurrentWeek] = useState<string>(calendarInfo.weekTabList[0].id);
 
-  const [courtList,] = useState(courtArr);
+  console.log(calendarInfo);
+  console.log(calendarInfo.weekTabList);
+
+  const [weekList, setWeekTabList] = useState(calendarInfo.weekTabList);
+
+  console.log(weekList)
 
   useEffect(() => {
 
-  }, [])
+    // 탭 리스트 변화
+    const date = new Date();
+    date.setFullYear(calendarDate.year);
+    date.setMonth(calendarDate.month - 1);
+
+    const weekInfo = getWeekList(date);
+
+    setCalendarInfo(weekInfo);
+    // setCalendarDate({
+    //   year: weekInfo.calendarYear,
+    //   month: weekInfo.calendarMonth,
+    // });
+    // setCurrentWeek(weekInfo.weekTabList[0].id);
+    // setWeekTabList(weekInfo.weekTabList);
+
+  }, [calendarDate])
+
+  useEffect(() => {
+
+
+  }, [calendarInfo])
 
   return (
     <>

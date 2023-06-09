@@ -15,7 +15,7 @@ const STRING_WEAK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
  */
 export const getWeekList = (args?: Date): WeekListProps => {
 
-  const date = args ? new Date(args) : new Date();
+  const date = args ? args : new Date();
 
   const calendarYear = date.getFullYear();
   const calendarMonth = date.getMonth() + 1;
@@ -98,7 +98,7 @@ export const getTimeZoneList = () => {
   }
 }
 
-export const getPrevNextMonth = (year: number, month: number) =>{
+export const getPrevNextMonth = (year: number, month: number) => {
 
   const dateMonth = month - 1;
 
