@@ -135,13 +135,18 @@ export const New = styled.i({
 
 export const ImageContainer = styled(Image)<CSS_TYPE>(
   {
-    position: "relative",
+    
   },
   props => ({
     width: props.width ? props.width : "100%",
     height: props.height ? props.height : "100%",
     padding: props.padding ? props.padding : "auto",
     margin: props.margin ? props.margin : "auto",
+    position: props.position ? props.position : "relative",
+    top: props.top,
+    bottom: props.bottom,
+    left: props.left,
+    right: props.right,
     cursor: props.cursor
   })
 );

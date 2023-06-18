@@ -16,6 +16,7 @@ export default function App({ Component, pageProps }: AppProps) {
       <AppLayout>
         <Component {...pageProps} />
       </AppLayout>
+      <div id="portal" />
     </>
   );
 }

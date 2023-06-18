@@ -7,6 +7,7 @@ import { WeekListProps } from "src/interfaces/calendar";
  * getDate(): 주어진 날짜의 일을 반환(ex, 28일)
  */
 const STRING_WEAK = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const STRING_WEAK_KR = ["일", "월", "화", "수", "목", "금", "토"];
 
 /**
  * 입력 날짜에 해당하는 주차 및 리스트 반환
@@ -21,6 +22,7 @@ export const getWeekList = (args?: Date): WeekListProps => {
   const calendarMonth = date.getMonth() + 1;
   let calendarDay = 1;
 
+  let currentWeek = "";
   const currentDate = date.getDate();
   const monthStartDay = new Date(calendarYear, date.getMonth(), 1);
   const monthLastDate = new Date(calendarYear, calendarMonth, 0);
@@ -36,6 +38,7 @@ export const getWeekList = (args?: Date): WeekListProps => {
 
   for (let monthWeekCount = 1; monthWeekCount <= calendarWeekCount; monthWeekCount++) {
 
+    let uuid = uuidV4();
     let dateWeekList = [];
     let startDate: number = 0;
     let endDate: number = 0;
@@ -51,7 +54,8 @@ export const getWeekList = (args?: Date): WeekListProps => {
       if (calendarMonthStartDay <= isCheckMonthStartDay && calendarDay <= calendarMonthLastDate) {
         dateWeekList.push({
           date: calendarDay,
-          day: STRING_WEAK[weekCount]
+          day: STRING_WEAK[weekCount],
+          day_KR: STRING_WEAK_KR[weekCount]
         })
         calendarDay++;
       };
@@ -61,13 +65,41 @@ export const getWeekList = (args?: Date): WeekListProps => {
     const startWeekDate = numberZeroFillFormat(calendarMonth, 2) + "." + numberZeroFillFormat(startDate, 2);
     const endWeekDate = numberZeroFillFormat(calendarMonth, 2) + "." + numberZeroFillFormat(endDate, 2);
 
+    const checkStartDate = new Date(calendarYear + "." + startWeekDate);
+    const checkEndDate = new Date(calendarYear + "." + endWeekDate);
+
+    if(checkStartDate <= date && checkEndDate >= date)
+    currentWeek = uuid;
+
     weekTabList.push({
-      id: uuidV4(),
+      id: uuid,
       name: `${monthWeekCount}주차 (${startWeekDate} ~ ${endWeekDate})`,
       startWeekDate: startWeekDate,
       endWeekDate: endWeekDate,
       value: startWeekDate + " ~ " + endWeekDate
     });
+
+    // 1주차 Date 빈 값 채워주기
+    if(dateWeekList.length < 7 ){
+
+      const emptyLength = 7 - dateWeekList.length;
+
+      for(let emptyDay = 0; emptyDay < emptyLength; emptyDay++){
+        if(monthWeekCount === 1){
+          dateWeekList.unshift({
+            date: "date" + emptyDay,
+            day: "day" + emptyDay,
+            day_KR: "day_KR" + emptyDay,
+          })
+        }else{
+          dateWeekList.push({
+            date: "date" + emptyDay,
+            day: "day" + emptyDay,
+            day_KR: "day_KR" + emptyDay,
+          })
+        }
+      }
+    }
 
     dateList.push({
       weekNumber: monthWeekCount,
@@ -78,6 +110,7 @@ export const getWeekList = (args?: Date): WeekListProps => {
   return {
     calendarYear: calendarYear,
     calendarMonth: calendarMonth,
+    currentWeek: currentWeek,
     currentDate: currentDate,
     weekTabList: weekTabList,
     dateList: dateList

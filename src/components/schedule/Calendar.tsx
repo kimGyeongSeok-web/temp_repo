@@ -1,45 +1,52 @@
+import { Dispatch, SetStateAction } from "react";
 import styled from "@emotion/styled";
+import { v4 as uuidV4 } from "uuid";
 import { Button, CSS_TYPE, ImageContainer as Image } from "@styles/styles";
 import { colorList } from "@utils/colorSet";
 import { ObjectProps } from "@interfaces/common";
+import { getTimeZoneList, getPrevNextMonth } from "@utils/date";
 import SingleArrowLeftIcon from "@icons/grey_single_arrow_left.svg";
 import SingleArrowRightIcon from "@icons/grey_single_arrow_right.svg";
 import WriteIcon from "@icons/edit_white.svg";
-import { getTimeZoneList, getPrevNextMonth } from "@utils/date";
-import { Dispatch, SetStateAction } from "react";
 
-interface T{
+interface U{
   [key: string]: number;
 };
 
-interface CalendarProps {
+interface CalendarProps{
   courtList: Array<ObjectProps<string>>;
-  calendarDate: T;
+  dateWeekList: {
+    weekNumber: number;
+    dateWeekList: Array<ObjectProps<number | string>>;
+  };
+  calendarDate: U;
   setCalendarDate: Dispatch<SetStateAction<{
     year: number;
     month: number;
+    week: number;
   }>>
+  setShowModal: Dispatch<SetStateAction<boolean>>;
 };
 
-const Calendar = ({ courtList, calendarDate, setCalendarDate }: CalendarProps) => {
+const Calendar = ({ courtList, dateWeekList, calendarDate, setCalendarDate, setShowModal }: CalendarProps) => {
 
   const { year, month } = calendarDate;
+  const currentWeekDayList = dateWeekList.dateWeekList;
 
   const { timeList } = getTimeZoneList();
-
-  // 몇년 몇월인지
-
-  // 몇주차인지
 
   // 코트의 갯수 및 종류
 
   // 예약리스트
 
+  // 공휴일 체크하고 이벤트 표시
+
   const onClickPrevMonthHandler = () =>{
     const { prevDate } = getPrevNextMonth(year, month);
     setCalendarDate({
       year: prevDate.year,
-      month: prevDate.month
+      month: prevDate.month,
+      week: 1,
     });
   };
 
@@ -48,7 +55,8 @@ const Calendar = ({ courtList, calendarDate, setCalendarDate }: CalendarProps) =
     const { nextDate } = getPrevNextMonth(year, month);
     setCalendarDate({
       year: nextDate.year,
-      month: nextDate.month
+      month: nextDate.month,
+      week: 1,
     });
   };
 
@@ -96,6 +104,7 @@ const Calendar = ({ courtList, calendarDate, setCalendarDate }: CalendarProps) =
             color={"var(--basic-white-color)"}
             backgroundColor={"var(--business-active-color)"}
             margin={"0 0 0 auto"}
+            onClick={() => setShowModal(true)}
           >
             <Image
               src={WriteIcon}
@@ -108,34 +117,20 @@ const Calendar = ({ courtList, calendarDate, setCalendarDate }: CalendarProps) =
         </HeaderBtnContainer>
       </HeaderContainer>
       <WeekHeaderContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
-        <WeekDayContainer>
-          <DayWrapper>월요일</DayWrapper>
-          <DayEventContainer>이벤트</DayEventContainer>
-        </WeekDayContainer>
+        {
+          (currentWeekDayList && currentWeekDayList.length > 0) && currentWeekDayList.map((item) => {
+            return(
+              <WeekDayContainer key={item.date}>
+                <DayWrapper
+                  color={item.day === "Sat" ? "var(--basic-blue-color)" : item.day === "Sun" ? "var(--basic-red-color)" : "var(--basic-black-color)"}
+                >
+                  {typeof(item.date) === "number" ? item.date + `(${item.day_KR})` : ""}
+                </DayWrapper>
+                <DayEventContainer></DayEventContainer>
+              </WeekDayContainer>
+            )
+          })
+        }
       </WeekHeaderContainer>
       <CalendarContainer>
         <TimeZoneContainer>
@@ -152,160 +147,23 @@ const Calendar = ({ courtList, calendarDate, setCalendarDate }: CalendarProps) =
           </ul>
         </TimeZoneContainer>
         <WeekContainer>
-          <DateContainer>
-            <DateEventLists>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-            <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-            <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-            <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-            <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
-          <DateContainer>
-            <DateEventLists>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-              <DateEventList>월요일 컨테이너 영역</DateEventList>
-            </DateEventLists>
-          </DateContainer>
+          {
+            (currentWeekDayList && currentWeekDayList.length > 0) && currentWeekDayList.map((item, index) => {
+              return(
+                <DateContainer key={uuidV4()}>
+                  {
+                    (timeList && timeList.length > 0) && timeList.map((event) => {
+                      return (
+                        <DateEventLists key={uuidV4()}>
+                          <DateEventList></DateEventList>
+                        </DateEventLists>
+                      )
+                    })
+                  }
+                </DateContainer>
+              )
+            })
+          }
         </WeekContainer>
       </CalendarContainer>
     </Container>
@@ -367,13 +225,20 @@ const WeekDayContainer = styled.div({
     borderRight: "1px solid var(--basic-grey-color)"
   }
 });
-const DayWrapper = styled.div({
-  height: "36px",
-  lineHeight: "36px",
-  textAlign: "center",
-  borderBottom: "1px solid var(--basic-grey-color)",
-});
+const DayWrapper = styled.div<CSS_TYPE>(
+  {
+    height: "36px",
+    lineHeight: "36px",
+    textAlign: "center",
+    borderBottom: "1px solid var(--basic-grey-color)",
+    fontWeight: "400"
+  },
+  props => ({
+    color: props.color
+  })
+);
 const DayEventContainer = styled.div({
+  minHeight: "28px",
   padding: "0.4rem 0.6rem",
 });
 const CalendarContainer = styled.div({
