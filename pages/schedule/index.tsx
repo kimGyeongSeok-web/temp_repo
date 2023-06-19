@@ -94,7 +94,7 @@ const SchedulePage = () => {
   useEffect(() => {
 
     // Page Init Mount Check
-    if(mount){
+    if (mount) {
 
       // 탭 리스트 변화
       const date = new Date();

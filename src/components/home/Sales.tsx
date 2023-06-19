@@ -9,7 +9,7 @@ const Sales = () => {
 
   return (
     <DashBoardItem
-      title={"2023.05.31. 까지의 매출현황이에요!"}
+      title={"2023.07.31. 까지의 매출현황이에요!"}
       width={"calc(60% - 12px)"}
       height={"0"}
       minHeight={"65vh"}
