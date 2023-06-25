@@ -86,6 +86,7 @@ export const globalStyles = (
         --basic-blue-color: rgba(66, 100, 251, 100); // #4264FB
         --basic-grey-color: rgba(222, 222, 222, 100); // #DEDEDE
         --basic-grey-2-color: rgba(234, 234, 234, 100); // #EAEAEA
+        --basic-grey-3-color: rgba(206, 206, 206, 100); // #CECECE
 
         --business-active-color: rgba(101, 165, 185, 100); // #65A5B9
         --deactive-color: rgba(204, 204, 204, 100); // #CCCCCC
@@ -140,8 +141,8 @@ export const ImageContainer = styled(Image)<CSS_TYPE>(
   props => ({
     width: props.width ? props.width : "100%",
     height: props.height ? props.height : "100%",
-    padding: props.padding ? props.padding : "auto",
-    margin: props.margin ? props.margin : "auto",
+    padding: props.padding ? props.padding : "0",
+    margin: props.margin ? props.margin : "0",
     position: props.position ? props.position : "relative",
     top: props.top,
     bottom: props.bottom,

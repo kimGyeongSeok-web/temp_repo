@@ -67,9 +67,10 @@ export const getWeekList = (args?: Date): WeekListProps => {
 
     const checkStartDate = new Date(calendarYear + "." + startWeekDate);
     const checkEndDate = new Date(calendarYear + "." + endWeekDate);
+    checkEndDate.setHours(23, 59, 59);
 
     if(checkStartDate <= date && checkEndDate >= date)
-    currentWeek = uuid;
+      currentWeek = uuid;
 
     weekTabList.push({
       id: uuid,

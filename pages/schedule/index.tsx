@@ -113,6 +113,7 @@ const SchedulePage = () => {
   useEffect(() => {
 
     const week = calendarInfo.weekTabList.findIndex((el) => el.id === currentWeek);
+
     setDateWeekList(calendarInfo.dateList[week]);
   }, [currentWeek])
 
