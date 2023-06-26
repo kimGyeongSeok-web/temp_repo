@@ -1,28 +1,32 @@
-import React, { useState } from "react";
+import React, { useState, MouseEvent } from "react";
 import styled from "@emotion/styled";
 import { CSS_TYPE, ImageContainer as Image } from "@styles/styles";
 import FilterIcon from "@icons/filter_black_icon.svg";
+import { dropDownActive, dropDownDeActive } from "@styles/animation";
 
 const Filter = () => {
 
   const [showDropDownContent, setShowDropDownContent] = useState<boolean>(false);
 
-  const onClickShowDropDownHandler = () =>{
+  const onClickShowDropDownHandler = (e: MouseEvent<HTMLDivElement>) => {
 
     setShowDropDownContent(!showDropDownContent);
   }
 
-  return(
+  // showDropDownContent에 따라서 애니메이션을 다르게 주어보자
+
+  return (
     <Container>
       <FilterContainer
-        onClick={() => onClickShowDropDownHandler()}
+        onClick={(e) => onClickShowDropDownHandler(e)}
       >
         <Image
           src={FilterIcon}
           alt={"filter icon"}
           width={16}
           height={16}
-         />
+          margin={"0 8px 0 0"}
+        />
         <div>
           <span>정렬기준</span>
           <span>생성날짜</span>
@@ -32,7 +36,8 @@ const Filter = () => {
           <span>오름차순</span>
         </div>
         <FilterDropDownContainer
-          display={showDropDownContent ? "block" : "none"}
+          className={showDropDownContent ? "" : "hidden"}
+          css={showDropDownContent ? dropDownActive : dropDownDeActive}
           onClick={(e) => e.stopPropagation()}
         >
           열릴 공간임
@@ -70,7 +75,7 @@ const FilterDropDownContainer = styled.div<CSS_TYPE>(
     borderRadius: "8px",
   },
   props => ({
-    display: props.display
+
   })
 )
 

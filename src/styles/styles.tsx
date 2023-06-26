@@ -1,6 +1,7 @@
 import { Global, css } from "@emotion/react";
 import styled from "@emotion/styled";
 import Image from "next/image";
+import ArrowDropDownIcon from "@icons/arrow_drop_down_black.svg";
 
 export type CSS_TYPE = {
   width?: string | number;
@@ -126,6 +127,11 @@ export const globalStyles = (
           outline: none;
         }
       }
+
+      .hidden{
+        display: none;
+        opacity: 0;
+      }
     `}
   />
 );
@@ -136,7 +142,7 @@ export const New = styled.i({
 
 export const ImageContainer = styled(Image)<CSS_TYPE>(
   {
-    
+
   },
   props => ({
     width: props.width ? props.width : "100%",
@@ -183,3 +189,37 @@ export const Button = styled.button<CSS_TYPE>(
     borderRadius: props.borderRadius ? props.borderRadius : "12px"
   })
 );
+
+export const Select = styled.select<CSS_TYPE>(
+  {
+    outline: 0,
+    appearance: "none",
+    background: `url("${ArrowDropDownIcon.src}") no-repeat right 9px center`
+  },
+  props => ({
+    width: props.width ? props.width : '',
+    minWidth: props.minWidth ? props.minWidth : '120px',
+    height: props.height ? props.height : '',
+    padding: props.padding ? props.padding : '',
+    margin: props.margin ? props.margin : '',
+    fontSize: props.fontSize ? props.fontSize : '0.9rem',
+    border: props.border ? props.border : "1px solid var(--basic-grey-3-color)",
+    borderColor: props.borderColor ? props.borderColor : '',
+    borderRadius: props.borderRadius ? props.borderRadius : '8px'
+  })
+)
+
+export const Input = styled.input<CSS_TYPE>(
+  {
+    border: "1px solid var(--basic-grey-3-color)",
+    margin: 0,
+
+    ":focus": {
+      borderColor: "var(--business-color)",
+      outline: "none"
+    }
+  },
+  props => ({
+    borderRadius: props.borderRadius ? props.borderRadius : "8px",
+  })
+)

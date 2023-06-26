@@ -8,9 +8,10 @@ interface ListProps {
   setState: Dispatch<SetStateAction<string>>;
   list?: any;
   borderBottom?: boolean;
+  buttonElement?: React.ReactNode;
 };
 
-const TabList = ({ state, setState, list, borderBottom }: ListProps): ReactElement => {
+const TabList = ({ state, setState, list, borderBottom, buttonElement }: ListProps): ReactElement => {
 
   return (
     <Container>
