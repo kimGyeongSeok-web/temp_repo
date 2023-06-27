@@ -13,7 +13,7 @@ const Search = ({ }: SearchProps) => {
     <Container>
       <SearchContainer>
         <Select padding={"6px 12px 6px 8px"}>
-          <option>얏호</option>
+          <option value={"all"}>전체</option>
         </Select>
         <SearchInput type={"text"} placeholder={"검색어를 입력해주세요."} />
       </SearchContainer>

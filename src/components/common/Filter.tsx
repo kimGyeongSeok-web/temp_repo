@@ -73,6 +73,8 @@ const FilterDropDownContainer = styled.div<CSS_TYPE>(
     padding: "6px 16px",
     border: "1px solid var(--basic-grey-3-color)",
     borderRadius: "8px",
+    backgroundColor: "var(--basic-white-color)",
+    zIndex: 99
   },
   props => ({
 

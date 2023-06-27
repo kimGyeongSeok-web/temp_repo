@@ -204,6 +204,7 @@ const CalendarHeaderContainer = styled.div({
   textAlign: "center",
   display: "flex",
   alignItems: "center",
+  justifyContent: "space-around",
   fontSize: "1.1rem"
 });
 const HeaderBtnContainer = styled.div({
