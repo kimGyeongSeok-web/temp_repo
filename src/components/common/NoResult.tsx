@@ -1,10 +1,10 @@
 import styled from "@emotion/styled";
 import infoIcon from "@icons/info.svg";
-import { ImageContainer } from "@styles/styles";
+import { CSS_TYPE, ImageContainer } from "@styles/styles";
 
-const NoResult = ({ description }: { description: string }) => {
+const NoResult = ({ height, description }: { height?: string, description: string }) => {
   return (
-    <Container>
+    <Container height={height}>
       <ScriptContainer>
         <ImageContainer
           src={infoIcon}
@@ -19,13 +19,17 @@ const NoResult = ({ description }: { description: string }) => {
   )
 };
 
-const Container = styled.div({
-  position: "relative",
-  width: "100%",
-  height: "100%",
-  backgroundColor: "var(--basic-grey-2-color)",
-  borderRadius: "inherit"
-});
+const Container = styled.div<CSS_TYPE>(
+  {
+    position: "relative",
+    width: "100%",
+    backgroundColor: "var(--basic-grey-4-color)",
+    borderRadius: "16px"
+  },
+  props => ({
+    height: props.height ? props.height : "100%"
+  })
+);
 const ScriptContainer = styled.div({
   position: "absolute",
   top: "50%",

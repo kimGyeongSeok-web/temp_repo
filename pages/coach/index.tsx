@@ -4,6 +4,7 @@ import PageHeader from "@components/common/PageHeader";
 import Search from "@components/common/Search";
 import TabList from "@components/common/TabList";
 import { useEffect, useState } from "react";
+import ListView from "@components/coach/ListView";
 
 const CoachPage = () => {
 
@@ -34,7 +35,7 @@ const CoachPage = () => {
       <Filter />
       <Search />
       <TabList state={currentTab} setState={setCurrentTab} list={tabList} borderBottom={true} />
-      <div>내용</div>
+      <ListView />
     </>
   )
 };

@@ -83,11 +83,13 @@ export const globalStyles = (
         --basic-red-color: rgba(250, 8, 95, 100);
         --basic-black-color: rgba(58, 58, 58, 100); // #3A3A3A
         --basic-yellow-color: rgba(250, 210, 100, 100);
-        --basic-sky-blue-color: rgba(20, 180, 199, 100); // #14B4C7
         --basic-blue-color: rgba(66, 100, 251, 100); // #4264FB
+        --basic-sky-blue-color: rgba(20, 180, 199, 100); // #14B4C7
+        --basic-alice-blue-color: rgba(235, 249, 255, 100); // #EBF9FF
         --basic-grey-color: rgba(222, 222, 222, 100); // #DEDEDE
         --basic-grey-2-color: rgba(234, 234, 234, 100); // #EAEAEA
         --basic-grey-3-color: rgba(206, 206, 206, 100); // #CECECE
+        --basic-grey-4-color: rgba(248, 248, 248, 100); // #F8F8F8
 
         --business-active-color: rgba(101, 165, 185, 100); // #65A5B9
         --deactive-color: rgba(204, 204, 204, 100); // #CCCCCC
